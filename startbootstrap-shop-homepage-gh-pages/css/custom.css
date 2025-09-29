@@ -1,0 +1,280 @@
+
+.header-personalizado {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 50%, #17a2b8 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-personalizado::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+
+.card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Seção de certificação melhorada */
+.certification-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 0;
+}
+
+.certification-card {
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.certification-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffc107, #28a745, #17a2b8);
+}
+
+.certification-badge {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #212529;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.certification-seal {
+    max-width: 200px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    transition: transform 0.3s ease;
+}
+
+.certification-seal:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* Melhorias na navegação */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #28a745 !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #20c997 !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #28a745 !important;
+}
+
+/* Badge do carrinho */
+.badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsividade melhorada */
+@media (max-width: 768px) {
+    .header-personalizado h1 {
+        font-size: 2rem;
+    }
+    
+    .header-personalizado p {
+        font-size: 1rem;
+    }
+    
+    .certification-card {
+        margin-bottom: 2rem;
+    }
+    
+    .certification-seal {
+        max-width: 150px;
+    }
+    
+    .card-img-top {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-personalizado {
+        padding: 2rem 0;
+    }
+    
+    .header-personalizado h1 {
+        font-size: 1.75rem;
+    }
+    
+    .certification-card {
+        padding: 2rem 1rem;
+    }
+    
+    .certification-seal {
+        max-width: 120px;
+    }
+}
+
+/* Animações suaves */
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Melhorias no footer */
+footer {
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+}
+
+/* Preços destacados */
+.text-success {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Toast notifications */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Melhorias no carrinho */
+.cart-item {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cart-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.quantity-input {
+    max-width: 80px;
+}
+
+/* Botões melhorados */
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.btn-outline-dark {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: #212529;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(33, 37, 41, 0.3);
+}
+
+/* Seções com espaçamento melhorado */
+section {
+    padding: 4rem 0;
+}
+
+/* Ícones melhorados */
+.bi {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .bi {
+    transform: scale(1.1);
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #28a745;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
