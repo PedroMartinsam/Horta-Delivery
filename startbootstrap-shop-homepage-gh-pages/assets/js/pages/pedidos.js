@@ -1,0 +1,105 @@
+import { getToken, getClienteId, logoutUser, isLoggedIn } from "../utils/auth.js";
+
+const API_BASE = "http://localhost:8080";
+
+async function fetchAuth(url, options = {}) {
+  const token = getToken();
+  const headers = options.headers || {};
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const opts = { ...options, headers };
+  return fetch(url, opts);
+}
+
+async function getPedidos() {
+  if (!isLoggedIn()) {
+    alert("Faça login para ver seus pedidos!");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const clienteId = getClienteId();
+  try {
+    const response = await fetchAuth(`${API_BASE}/pedido`);
+    if (!response.ok) throw new Error(await response.text());
+    const pedidos = await response.json();
+
+    // Filtra apenas pedidos do cliente logado
+    const meusPedidos = pedidos.filter(p => p.cliente === Number(clienteId));
+    renderPedidos(meusPedidos);
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao carregar pedidos: " + err.message);
+  }
+}
+
+// ✅ Função movida para fora do getPedidos()
+async function atualizarStatusPedido(id, acao) {
+  try {
+    const response = await fetchAuth(`${API_BASE}/pedido/${id}/${acao}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+
+    const pedidoAtualizado = await response.json();
+    alert(`✅ Pedido #${pedidoAtualizado.id} agora está como ${pedidoAtualizado.statusPedido}`);
+
+    // Atualiza a lista de pedidos após alterar o status
+    getPedidos();
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao atualizar status do pedido: " + err.message);
+  }
+}
+
+function renderPedidos(pedidos) {
+  const container = document.getElementById("pedidos-list");
+  if (!container) return;
+
+  if (pedidos.length === 0) {
+    container.innerHTML = "<p>Você ainda não realizou nenhum pedido.</p>";
+    return;
+  }
+
+  container.innerHTML = pedidos.map(p => `
+    <div class="card mb-3">
+      <div class="card-header">
+        Pedido #${p.id} - <strong>${p.statusPedido}</strong>
+      </div>
+      <div class="card-body">
+        <p><strong>Data:</strong> ${p.data}</p>
+        <p><strong>Forma de pagamento:</strong> ${p.formaPagamento}</p>
+        <p><strong>Valor total:</strong> R$ ${p.valorTotal.toFixed(2).replace('.', ',')}</p>
+
+        <button class="btn btn-sm btn-primary" onclick="verDetalhes(${p.id})">Ver detalhes</button>
+
+        <!-- ✅ Botões para mudar status -->
+        <button class="btn btn-sm btn-warning" onclick="atualizarStatusPedido(${p.id}, 'preparar')">Preparar</button>
+        <button class="btn btn-sm btn-success" onclick="atualizarStatusPedido(${p.id}, 'entregar')">Entregar</button>
+        <button class="btn btn-sm btn-danger" onclick="atualizarStatusPedido(${p.id}, 'cancelar')">Cancelar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Deixa acessível globalmente para os botões onclick
+window.verDetalhes = async function (pedidoId) {
+  try {
+    const response = await fetchAuth(`${API_BASE}/pedido/${pedidoId}`);
+    if (!response.ok) throw new Error(await response.text());
+    const pedido = await response.json();
+
+    alert(`Pedido #${pedido.id}\nStatus: ${pedido.statusPedido}\nValor: R$ ${pedido.valorTotal.toFixed(2).replace('.', ',')}`);
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao buscar detalhes do pedido: " + err.message);
+  }
+};
+
+// ✅ Também expõe a função globalmente
+window.atualizarStatusPedido = atualizarStatusPedido;
+
+document.addEventListener("DOMContentLoaded", getPedidos);

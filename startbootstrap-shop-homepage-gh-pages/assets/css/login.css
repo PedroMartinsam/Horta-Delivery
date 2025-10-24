@@ -1,0 +1,96 @@
+/* Fundo da tela de login */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    background-image: url('../pastas fotos/fondo Login.jpg'); /* caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    color: #023047;
+}
+
+/* Botão no canto superior esquerdo */
+.btnn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 12px 25px;
+    background-color: #808080;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btnn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.25);
+}
+
+.btnn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+/* Formulário centralizado */
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.95); /* leve transparência para ver o fundo */
+    border-radius: 7px;
+    padding: 40px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+    gap: 15px;
+}
+
+.formLogin input {
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.formLogin input:focus {
+    border-color: #808080;
+}
+
+.formLogin label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn {
+    background-color: #808080;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
