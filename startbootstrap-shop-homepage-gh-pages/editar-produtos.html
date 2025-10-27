@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel de Produtos - Admin</title>
+
+    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+
+      .navbar {
+        background-color: #198754;
+      }
+
+      .navbar-brand,
+      .nav-link,
+      .navbar-text {
+        color: white !important;
+      }
+
+      .table th,
+      .table td {
+        vertical-align: middle;
+      }
+
+      .btn {
+        margin-right: 6px;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <nav class="navbar navbar-expand-lg mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="index.html">Horta Delivery</a>
+        <div class="d-flex">
+          <a href="index.html" class="btn btn-light btn-sm me-2">Voltar à Loja</a>
+          <button class="btn btn-outline-light btn-sm" onclick="logoutUser()">Sair</button>
+        </div>
+      </div>
+    </nav>
+
+  
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold">Gerenciar Produtos</h2>
+        <a href="novo-produto.html"><button id="btn-add" class="btn btn-success">➕ Novo Produto</button></a>
+      </div>
+
+     
+      <div class="table-responsive">
+        <table id="tabela-produtos" class="table table-striped table-hover align-middle">
+          <thead class="table-success">
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th>Estoque</th>
+              <th>Grupo</th>
+              
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="7" class="text-center text-muted">Carregando produtos...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  
+    <div
+      class="modal fade"
+      id="produtoModal"
+      tabindex="-1"
+      aria-labelledby="produtoModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="produtoModalLabel">Novo Produto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-produto">
+              <input type="hidden" id="produto-id" />
+              <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input type="text" id="produto-nome" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea id="produto-descricao" class="form-control" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Preço</label>
+                <input type="number" id="produto-preco" class="form-control" step="0.01" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Quantidade em Estoque</label>
+                <input type="number" id="produto-estoque" class="form-control" required />
+              </div>
+
+              
+              <div class="mb-3">
+                <label class="form-label">Grupo do Produto</label>
+                <select id="produto-grupo" class="form-select" required>
+                  <option value="">Selecione...</option>
+                  <option value="1">VERDURA</option>
+                  <option value="2">LEGUME</option>
+                </select>
+                <div class="form-text">(Grupo enviado como ID: 1 = VERDURA, 2 = LEGUME)</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">URL da Imagem</label>
+                <input type="text" id="produto-imagem" class="form-control" placeholder="opcional">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="btn-salvar" class="btn btn-success">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="assets/js/pages/editar-produtos.js"></script>
+    <script type="module" src="assets/js/utils/auth.js"></script>
+  </body>
+</html>

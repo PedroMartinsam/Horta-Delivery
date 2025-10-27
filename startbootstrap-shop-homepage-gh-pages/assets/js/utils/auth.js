@@ -22,7 +22,6 @@ export async function loginUser(username, password) {
   sessionStorage.setItem("jwtToken", cleanToken);
   sessionStorage.setItem("username", username);
 
-  // ⚙️ Busca o ID do cliente pelo e-mail (username)
   const userResp = await fetch(`${API_BASE}/cliente/email/${username}`, {
     headers: { Authorization: `Bearer ${cleanToken}` },
   });

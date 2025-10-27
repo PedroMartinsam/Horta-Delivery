@@ -2,7 +2,6 @@ import { getToken } from "../utils/auth.js";
 
 const API_BASE = "http://localhost:8080";
 
-// helper para fetch com token
 async function fetchAuth(url, options = {}) {
   const token = getToken();
   const headers = options.headers || {};
@@ -38,7 +37,6 @@ export async function listarProdutos() {
   }
 }
 
-// Exemplo de outro endpoint usando fetchAuth
 export async function cadastrarProduto(produto) {
   try {
     const response = await fetchAuth(`${API_BASE}/produto`, {
@@ -57,4 +55,45 @@ export async function cadastrarProduto(produto) {
     console.error("Erro em cadastrarProduto():", error);
     throw error;
   }
+
+  
 }
+
+export async function atualizarProduto(id, produto) {
+  try {
+    const response = await fetchAuth(`${API_BASE}/produto/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(produto),
+    });
+
+    if (!response.ok) {
+      const txt = await response.text();
+      throw new Error("Erro ao atualizar produto: " + txt);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Erro em atualizarProduto():", error);
+    throw error;
+  }
+}
+
+export async function deletarProduto(id) {
+  try {
+    const response = await fetchAuth(`${API_BASE}/produto/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      const txt = await response.text();
+      throw new Error("Erro ao deletar produto: " + txt);
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Erro em deletarProduto():", error);
+    throw error;
+  }
+}
+

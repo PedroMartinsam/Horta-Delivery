@@ -6,7 +6,7 @@ const token = getToken();
 const mensagem = document.getElementById("mensagem");
 const selectGrupo = document.getElementById("grupoProduto");
 
-// 🔹 Função para fetch com token
+
 async function fetchAuth(url, options = {}) {
   const headers = options.headers || {};
   if (token) headers.Authorization = `Bearer ${token}`;
@@ -14,7 +14,6 @@ async function fetchAuth(url, options = {}) {
   return fetch(url, opts);
 }
 
-// 🔹 Carregar grupos do backend
 async function carregarGrupos() {
   try {
     const response = await fetchAuth(`${API_BASE}/grupoproduto`);
@@ -34,7 +33,6 @@ async function carregarGrupos() {
   }
 }
 
-// 🔹 Enviar produto
 document.getElementById("formProduto").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -58,7 +56,7 @@ document.getElementById("formProduto").addEventListener("submit", async (e) => {
       const produtoCriado = await response.json();
       mensagem.textContent = `✅ Produto "${produtoCriado.nome}" cadastrado com sucesso!`;
       mensagem.style.color = "green";
-      console.log("Produto criado:", produtoCriado); // log no backend
+      console.log("Produto criado:", produtoCriado); 
       e.target.reset();
     } else {
       const err = await response.text();
@@ -73,5 +71,4 @@ document.getElementById("formProduto").addEventListener("submit", async (e) => {
   }
 });
 
-// 🔹 Inicializa
 carregarGrupos();

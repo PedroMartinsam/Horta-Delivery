@@ -32,7 +32,6 @@ async function getPedidos() {
   }
 }
 
-// ✅ Função movida para fora do getPedidos()
 async function atualizarStatusPedido(id, acao) {
   try {
     const response = await fetchAuth(`${API_BASE}/pedido/${id}/${acao}`, {
@@ -47,7 +46,6 @@ async function atualizarStatusPedido(id, acao) {
     const pedidoAtualizado = await response.json();
     alert(`✅ Pedido #${pedidoAtualizado.id} agora está como ${pedidoAtualizado.statusPedido}`);
 
-    // Atualiza a lista de pedidos após alterar o status
     getPedidos();
   } catch (err) {
     console.error(err);
@@ -85,7 +83,6 @@ function renderPedidos(pedidos) {
   `).join('');
 }
 
-// Deixa acessível globalmente para os botões onclick
 window.verDetalhes = async function (pedidoId) {
   try {
     const response = await fetchAuth(`${API_BASE}/pedido/${pedidoId}`);
@@ -99,7 +96,6 @@ window.verDetalhes = async function (pedidoId) {
   }
 };
 
-// ✅ Também expõe a função globalmente
 window.atualizarStatusPedido = atualizarStatusPedido;
 
 document.addEventListener("DOMContentLoaded", getPedidos);
