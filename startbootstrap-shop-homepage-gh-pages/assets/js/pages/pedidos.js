@@ -72,16 +72,35 @@ function renderPedidos(pedidos) {
         <p><strong>Forma de pagamento:</strong> ${p.formaPagamento}</p>
         <p><strong>Valor total:</strong> R$ ${p.valorTotal.toFixed(2).replace('.', ',')}</p>
 
-        <button class="btn btn-sm btn-primary" onclick="verDetalhes(${p.id})">Ver detalhes</button>
+        <h5>Produtos:</h5>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${p.vendas.map(v => `
+              <tr>
+                <td>${v.nomeProduto}</td>
+                <td>${v.quantidade}</td>
+                <td>R$ ${v.subTotal.toFixed(2).replace('.', ',')}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
 
-        <!-- ✅ Botões para mudar status -->
-        <button class="btn btn-sm btn-warning" onclick="atualizarStatusPedido(${p.id}, 'preparar')">Preparar</button>
-        <button class="btn btn-sm btn-success" onclick="atualizarStatusPedido(${p.id}, 'entregar')">Entregar</button>
-        <button class="btn btn-sm btn-danger" onclick="atualizarStatusPedido(${p.id}, 'cancelar')">Cancelar</button>
+        <!-- Botões para mudar status -->
+        <button class="btn btn-sm btn-warning btn-status" onclick="atualizarStatusPedido(${p.id}, 'preparar')">Preparar</button>
+        <button class="btn btn-sm btn-success btn-status" onclick="atualizarStatusPedido(${p.id}, 'entregar')">Entregar</button>
+        <button class="btn btn-sm btn-danger btn-status" onclick="atualizarStatusPedido(${p.id}, 'cancelar')">Cancelar</button>
       </div>
     </div>
   `).join('');
 }
+
 
 window.verDetalhes = async function (pedidoId) {
   try {
