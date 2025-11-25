@@ -1,102 +1,105 @@
-/* 1. Estilização do Corpo (BODY) com Fundo e Camada Escura */
+/* 1. Corpo e fundo */
 body {
-    background-image: url('../pastas fotos/fondo Login.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; 
-    margin: 0;
-    font-family: 'Arial', sans-serif; 
+background-image: url('../pastas fotos/fondo Login.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
 
-    position: relative; 
-    overflow: hidden; 
+
+display: flex; 
+justify-content: center;
+align-items: center;
+min-height: 100vh; 
+margin: 0;
+font-family: 'Arial', sans-serif; 
+position: relative; 
+
+
 }
 
-/* Camada escura sobre a imagem de fundo (Menos escura que o teste anterior) */
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Preto com 25% de opacidade. Reduzimos a opacidade para que o card fique mais escuro que o fundo. */
-    background-color: rgba(0, 0, 0, 0.7); 
-    z-index: -1; 
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: -1;
 }
 
-/* 2. Estilização do Contêiner de Login (Fosco e Destacado) */
-.login-container {
-    /* Fundo PRETO com 70% de opacidade (Mais escuro que o fundo da imagem) */
-    background-color: rgba(54, 54, 54, 0.7); 
-    
-    /* Mantendo o efeito de vidro fosco para a modernidade */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); 
-    
-    padding: 40px;
-    border-radius: 20px; 
-    /* Sombra branca sutil para se destacar do fundo escuro */
-    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1); 
-    width: 300px; 
-    text-align: center;
-    /* Borda clara sutil */
-    border: 1px solid rgba(54, 54, 54, 0.5); 
-
-    z-index: 1; 
+/* 2. Contêiner dos formulários */
+.form-container {
+background-color: rgba(54, 54, 54, 0.7);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+padding: 40px;
+border-radius: 20px;
+box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+width: 320px;
+text-align: center;
+border: 1px solid rgba(54, 54, 54, 0.5);
+z-index: 1;
 }
 
-/* 3. Estilização do Título e Campos (Cor Branca para contraste) */
-.login-container h2 {
-    margin-bottom: 30px;
-    /* Título branco para alto contraste com o card escuro */
-    color: #fff; 
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-shadow: none; 
+/* 3. Títulos */
+.form-container h2 {
+margin-bottom: 30px;
+color: #fff;
+font-weight: 600;
+letter-spacing: 1px;
 }
 
-#loginForm input {
-    width: calc(100% - 20px); 
-    padding: 12px 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 8px;
-    /* Mantenha inputs claros para facilitar a digitação */
-    background-color: rgba(255, 255, 255, 0.95); 
-    color: #333;
-    font-size: 16px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+/* 4. Inputs */
+.form-container input {
+width: calc(100% - 20px);
+padding: 12px 10px;
+margin-bottom: 20px;
+border: none;
+border-radius: 8px;
+background-color: rgba(255, 255, 255, 0.95);
+color: #333;
+font-size: 16px;
+transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-#loginForm input:focus {
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(85, 139, 47, 0.5); 
-    outline: none;
+.form-container input:focus {
+background-color: #fff;
+box-shadow: 0 0 0 3px rgba(85, 139, 47, 0.5);
+outline: none;
 }
 
-#loginForm button {
-    width: 100%;
-    padding: 12px;
-    background-color: #558B2F; 
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.1s;
+/* 5. Botões */
+.form-container button {
+width: 100%;
+padding: 12px;
+background-color: #558B2F;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 18px;
+font-weight: bold;
+transition: background-color 0.3s ease, transform 0.1s;
 }
 
-#loginForm button:hover {
-    background-color: #689F38;
+.form-container button:hover {
+background-color: #689F38;
 }
 
-#loginForm button:active {
-    transform: scale(0.98);
+.form-container button:active {
+transform: scale(0.98);
+}
+
+/* 6. Links */
+.form-container p.text-center a {
+color: #fff;
+text-decoration: none;
+font-weight: 500;
+transition: color 0.3s;
+}
+
+.form-container p.text-center a:hover {
+color: #A5D6A7;
 }
