@@ -101,24 +101,31 @@ export async function checkout() {
   try {
     const clienteId = getClienteId();
     if (!clienteId) {
-      alert("ID do cliente não encontrado. Faça login novamente.");
+      alert("ID do cliente não encontrado! Faça login novamente.");
       logoutUser();
       return;
     }
 
-    // 🟢 Aqui criamos o JSON EXATO que o backend precisa:
-    const formaPagamentoSelect = document.getElementById("formaPagamento");
-const formaPagamento = formaPagamentoSelect ? formaPagamentoSelect.value.toUpperCase() : "DINHEIRO"; // padrão
+    
+    const pedidoDTO = {
+      cliente: Number(clienteId),
+      formaPagamento: document.getElementById("formaPagamento").value.toUpperCase(),
+      data: new Date().toISOString().split("T")[0],
 
-const pedidoDTO = {
-  cliente: Number(clienteId),
-  formaPagamento: formaPagamento, // envia 1 ou 2
-  data: new Date().toISOString().split("T")[0]
-};
-    // Cria o pedido
+      enderecoEntrega: document.getElementById("enderecoEntrega").value,
+      bairroEntrega: document.getElementById("bairroEntrega").value,
+      cidadeEntrega: document.getElementById("cidadeEntrega").value,
+      cepEntrega: document.getElementById("cepEntrega").value,
+      referenciaEntrega: document.getElementById("referenciaEntrega").value,
+      nomeRecebedor: document.getElementById("nomeRecebedor").value,
+      telefoneContato: document.getElementById("telefoneContato").value
+    };
+
+    console.log("ENVIANDO PEDIDO DTO:", pedidoDTO);
+
     const pedido = await criarPedido(pedidoDTO);
 
-    // Cria vendas para cada item do carrinho
+    
     for (const item of cart) {
       await criarVenda({
         clienteId: Number(clienteId),
@@ -132,11 +139,13 @@ const pedidoDTO = {
     localStorage.removeItem("carrinho");
     renderCart();
     updateCartCount();
+
   } catch (err) {
     console.error("Erro ao finalizar pedido:", err);
     alert("Erro ao finalizar pedido: " + (err.message || "Erro desconhecido"));
   }
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

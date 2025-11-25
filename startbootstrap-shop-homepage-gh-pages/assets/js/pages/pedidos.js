@@ -72,7 +72,16 @@ function renderPedidos(pedidos) {
         <p><strong>Forma de pagamento:</strong> ${p.formaPagamento}</p>
         <p><strong>Valor total:</strong> R$ ${p.valorTotal.toFixed(2).replace('.', ',')}</p>
 
-        <h5>Produtos:</h5>
+        <h5 class="mt-3">Informações de Entrega:</h5>
+        <p><strong>Endereço:</strong> ${p.enderecoEntrega || "—"}</p>
+        <p><strong>Bairro:</strong> ${p.bairroEntrega || "—"}</p>
+        <p><strong>Cidade:</strong> ${p.cidadeEntrega || "—"}</p>
+        <p><strong>CEP:</strong> ${p.cepEntrega || "—"}</p>
+        <p><strong>Referência:</strong> ${p.referenciaEntrega || "—"}</p>
+        <p><strong>Recebedor:</strong> ${p.nomeRecebedor || "—"}</p>
+        <p><strong>Telefone:</strong> ${p.telefoneContato || "—"}</p>
+
+        <h5 class="mt-3">Produtos:</h5>
         <table class="table table-sm">
           <thead>
             <tr>
