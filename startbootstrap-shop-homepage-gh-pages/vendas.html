@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Vendas</title>
+    <link rel="stylesheet" href="./assets/css/vendas.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="index.html">Horta Delivery</a>
+        <div class="d-flex">
+          <a href="index.html" class="btn btn-light btn-sm me-2">Voltar à Loja</a>
+          <button class="btn btn-outline-light btn-sm" onclick="logoutUser()">Sair</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <h1>📊 Registro de Vendas</h1>
+
+        <table id="tabelaVendas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Cliente</th>
+                    <th>Pedido</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+    </div>
+<div class="total-vendas">
+    <h2>Total Geral: R$ <span id="totalGeral">0,00</span></h2>
+</div>
+
+
+
+    
+
+    <script type="module" src="./assets/js/pages/vendas.js"></script>
+</body>
+</html>
