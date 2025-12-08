@@ -230,19 +230,32 @@ async function salvarProduto() {
 
 async function excluirProduto(id) {
   if (!confirm("Tem certeza que deseja excluir este produto?")) return;
+
   try {
     const res = await fetchAuth(`${API_BASE}/produto/${id}`, { method: "DELETE" });
+
+    // 🔥 Tratamento específico para ERRO 403 (produto em pedido ativo)
+    if (res.status === 403) {
+      alert("❌ Este produto está em um pedido ativo e não pode ser excluído.");
+      return;
+    }
+
+    // Outros erros
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(txt || `Erro HTTP ${res.status}`);
+      alert("Erro ao excluir produto: " + txt);
+      return;
     }
+
     await carregarProdutos();
-    alert("Produto removido.");
+    alert("Produto removido com sucesso!");
+
   } catch (err) {
     console.error("Erro ao excluir produto:", err);
-    alert("Erro ao excluir produto: " + (err.message || "ver console"));
+    alert("Erro ao excluir produto (ver console).");
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   if (!isLoggedIn()) {

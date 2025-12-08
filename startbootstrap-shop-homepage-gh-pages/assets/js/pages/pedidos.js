@@ -105,10 +105,35 @@ function renderPedidos(pedidos) {
         <button class="btn btn-sm btn-warning btn-status" onclick="atualizarStatusPedido(${p.id}, 'preparar')">Preparar</button>
         <button class="btn btn-sm btn-success btn-status" onclick="atualizarStatusPedido(${p.id}, 'entregar')">Entregar</button>
         <button class="btn btn-sm btn-danger btn-status" onclick="atualizarStatusPedido(${p.id}, 'cancelar')">Cancelar</button>
+
+        <button class="btn btn-sm btn-outline-danger btn-status" onclick="deletarPedido(${p.id})">
+  Excluir Pedido
+</button>
       </div>
     </div>
   `).join('');
 }
+
+async function deletarPedido(id) {
+  if (!confirm("Tem certeza que deseja excluir o pedido #" + id + "?")) {
+    return;
+  }
+
+  try {
+    const response = await fetchAuth(`${API_BASE}/pedido/${id}`, {
+      method: "DELETE"
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+
+    alert("Pedido excluído com sucesso!");
+    getPedidos();
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao excluir: " + err.message);
+  }
+}
+
 
 
 window.verDetalhes = async function (pedidoId) {
@@ -125,5 +150,7 @@ window.verDetalhes = async function (pedidoId) {
 };
 
 window.atualizarStatusPedido = atualizarStatusPedido;
+window.deletarPedido = deletarPedido;
+
 
 document.addEventListener("DOMContentLoaded", getPedidos);
